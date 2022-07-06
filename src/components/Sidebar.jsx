@@ -1,10 +1,16 @@
 import React from "react";
-import { Heading, SideDiv } from "./styles/Layout.styled";
+import { useDispatch } from "react-redux";
+import { Button, Details, Heading, SideDiv } from "./styles/Layout.styled";
 
-const Sidebar = () => {
+const Sidebar = ({ close }) => {
+  const dispatch = useDispatch();
+
   return (
     <SideDiv>
-      <Heading size="1.5rem">Filter</Heading>
+      <Details>
+        <Heading size="1.5rem">Cart</Heading>
+        <Button onClick={() => dispatch(close())}>Close</Button>
+      </Details>
     </SideDiv>
   );
 };

@@ -6,18 +6,13 @@ export const Layout = styled.div`
   margin: 0 auto;
 `;
 
-export const Container = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-`;
-
 export const Navbar = styled.div`
   height: 5rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
 `;
 
 export const Button = styled.button`
@@ -30,17 +25,20 @@ export const Button = styled.button`
 `;
 
 export const SideDiv = styled.div`
-  position: sticky;
+  position: fixed;
   padding: 1rem;
   top: 0;
-  width: 20%;
+  right: 0;
+  width: 30%;
   height: 100vh;
   background: green;
+  transition: 1s;
 `;
 
 export const Main = styled.div`
-  width: 80%;
+  width: 100%;
   padding: 0 1rem;
+  background-color: rgb(231, 228, 234);
 `;
 
 export const Grid = styled.div`
@@ -56,12 +54,29 @@ export const Heading = styled.h1`
 `;
 
 export const Card = styled.div`
-  padding: 0.5rem;
   background-color: white;
   border-radius: 0.5rem;
+  overflow: hidden;
   width: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+export const Image = styled.img`
+  height: 60%;
+  width: 100%;
+`;
+
+export const Details = styled.div`
+  display: flex;
+  padding: 0 0.5rem;
+  margin-top: 1rem;
+  justify-content: space-between;
+`;
+
+export const CartButton = styled(Button)`
+  margin: 1rem 0.5rem;
+  margin-bottom: 0;
 `;
 
 export const Errorcontainer = styled.div`
