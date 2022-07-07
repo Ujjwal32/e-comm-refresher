@@ -7,6 +7,7 @@ const initialState = {
   error: false,
   message: "",
   products: [],
+  filter: [],
 };
 
 export const fetchProducts = createAsyncThunk("products/fetch", async () => {
@@ -19,7 +20,30 @@ export const fetchProducts = createAsyncThunk("products/fetch", async () => {
 const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    // filter by category
+    filterProduct: (state, action) => {
+      console.log(state.products);
+      const filteredProduct = state.products.filter((item) =>
+        item.category.includes(action.payload)
+      );
+      state.filter = filteredProduct;
+    },
+    //filter by price
+    filterByPrice: (state, action) => {
+      if (action.payload === "high") {
+        const hightToLow = state.products.sort((a, b) => {
+          return b.price.slice(1) - a.price.slice(1);
+        });
+        state.filter = hightToLow;
+      } else {
+        const lowToHigh = state.products.sort((a, b) => {
+          return a.price.slice(1) - b.price.slice(1);
+        });
+        state.filter = lowToHigh;
+      }
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state, action) => {
@@ -28,6 +52,7 @@ const productSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.loading = false;
       state.products = action.payload.product;
+      state.filter = action.payload.product;
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.loading = false;
@@ -37,4 +62,5 @@ const productSlice = createSlice({
   },
 });
 
+export const { filterProduct, filterByPrice } = productSlice.actions;
 export default productSlice.reducer;

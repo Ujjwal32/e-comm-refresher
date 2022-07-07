@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import Navigation from "./Navigation";
+import filterIcon from "../image/filter.png";
 import {
   Card,
   CartButton,
   Details,
   Errorcontainer,
+  FilterIcon,
   Grid,
   Heading,
   Image,
@@ -14,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/productSlice";
 import { addToCart } from "../features/cartSlice";
 
-const Product = () => {
+const Product = ({ toggleFilter }) => {
   const state = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
@@ -41,15 +43,22 @@ const Product = () => {
   return (
     <Main>
       <Navigation />
-      <Heading size="1.5rem">New Arrivals</Heading>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Heading size="1.5rem">Products</Heading>
+        <FilterIcon onClick={() => toggleFilter(true)}>
+          <img src={filterIcon} alt="filter" />
+        </FilterIcon>
+      </div>
       <Grid>
-        {state.products &&
-          state.products.map((product) => (
+        {state.filter &&
+          state.filter.map((product) => (
             <Card key={product.id}>
-              <Image
-                src={`https://electronic-ecommerce.herokuapp.com/${product.image}`}
-                alt=""
-              />
+              <Image>
+                <img
+                  src={`https://electronic-ecommerce.herokuapp.com/${product.image}`}
+                  alt={product.name}
+                />
+              </Image>
               <Details>
                 <Heading size="1rem">{product.name}</Heading>
                 <Heading size="0.9rem">
