@@ -130,7 +130,7 @@ export const PriceAndButton = styled.div`
 `;
 export const Buttongroup = styled.div`
   display: flex;
-  width: 55%;
+  width: ${(props) => props.width || "55%"};
   margin-top: 0.5rem;
   justify-content: space-between;
   align-items: center;
@@ -178,5 +178,31 @@ export const FilterIcon = styled.div`
 
   @media only screen and (max-width: 768px) {
     display: block;
+  }
+`;
+
+//form style component
+export const Form = styled.form`
+  width: 50%;
+  padding: 1.5rem;
+  text-align: center;
+  margin: auto;
+
+  @media only screen and (max-width: 768px) {
+    width: 80%;
+  }
+`;
+export const InputContainer = styled.div`
+  width: 90%;
+  margin: 2rem auto;
+`;
+export const Input = styled.input`
+  width: 100%;
+  height: 2rem;
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  &:not(:first-child) {
+    margin-top: 1rem;
   }
 `;
