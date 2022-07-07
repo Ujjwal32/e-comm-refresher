@@ -11,20 +11,6 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    showTotalPriceAndAmount: (state, action) => {
-      const price = state.cartItems.reduce((acc, curr) => {
-        acc += curr.totalPrice;
-        return acc;
-      }, 0);
-
-      const number = state.cartItems.reduce((acc, curr) => {
-        acc += curr.quantity;
-        return acc;
-      }, 0);
-
-      state.totalprice = price;
-      state.totalnumber = number;
-    },
     toggleCart: (state, action) => {
       if (action.payload === "open") {
         state.showCart = true;
@@ -41,27 +27,25 @@ export const cartSlice = createSlice({
       };
       state.cartItems = state.cartItems.concat(itemInCart);
       state.totalprice = state.totalprice + itemInCart.totalPrice;
-      state.totalnumber = state.totalnumber + itemInCart.quantity;
+      state.totalnumber = ++state.totalnumber;
     },
     changeQuantity: (state, action) => {
       const id = action.payload.id;
       const selected_item = state.cartItems.find((item) => item.id === id);
-      const initialPrice = selected_item.price.slice(1);
-      action.payload.action === "inc"
-        ? ++selected_item.quantity
-        : --selected_item.quantity;
-      selected_item.totalPrice = Number(selected_item.quantity) * initialPrice;
-      state.totalprice = state.totalprice + selected_item.totalPrice;
-      state.totalnumber = state.totalnumber + selected_item.quantity;
+      const price = parseInt(selected_item.price.slice(1));
+      if (action.payload.action === "inc") {
+        ++selected_item.quantity;
+        state.totalprice = state.totalprice + price;
+        state.totalnumber = state.totalnumber + 1;
+      } else {
+        --selected_item.quantity;
+        state.totalprice = state.totalprice - price;
+        state.totalnumber = state.totalnumber - 1;
+      }
     },
   },
 });
 
-export const {
-  toggleCart,
-  addToCart,
-  changeQuantity,
-  showTotalPriceAndAmount,
-} = cartSlice.actions;
+export const { toggleCart, addToCart, changeQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;
