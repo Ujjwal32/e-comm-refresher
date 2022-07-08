@@ -8,4 +8,4 @@ Simple e-commerce application built using react and redux. Features include:
 5. Styled component for styling
 
 ### Demo
-![Demo](src/image/demo.mp4)
+![Demo](src/image/demo.gif)
