@@ -206,3 +206,23 @@ export const Input = styled.input`
     margin-top: 1rem;
   }
 `;
+
+export const Errormessage = styled.div`
+  font-size: 0.8rem;
+  color: red;
+  text-align: left;
+  margin-left: 0.1rem;
+`;
+
+export const Modal = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  backdrop-filter: blur(5px);
+`;

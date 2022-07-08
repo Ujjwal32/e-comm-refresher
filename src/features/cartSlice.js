@@ -43,9 +43,16 @@ export const cartSlice = createSlice({
         state.totalnumber = state.totalnumber - 1;
       }
     },
+    clearCart: (state, action) => {
+      state.showCart = false;
+      state.totalnumber = 0;
+      state.totalprice = 0;
+      state.cartItems = [];
+    },
   },
 });
 
-export const { toggleCart, addToCart, changeQuantity } = cartSlice.actions;
+export const { toggleCart, addToCart, changeQuantity, clearCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
